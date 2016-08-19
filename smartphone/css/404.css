@@ -1,0 +1,19 @@
+/*
+HTML 5 Template Name: 
+File: 404 - 8 CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+body
+{
+	background: #2B2B2B;
+}
+
+#fof{display:block; position:relative; width:520px; height:520px; margin:0 auto; background:url("../images/404.png") top center no-repeat;}
+#fof h1{visibility:hidden;}
+#fof p{display:block; margin:0; padding:0; font-size:26px; text-transform:uppercase; text-align:center;}
+#fof p a{display:block; position:absolute; top:218px; width:108px; height:95px; padding:13px 0 0 0; color:#FFFFFF; background-color:transparent;}
+#fof p a.go-back{left:18px;}
+#fof p a.go-home{right:18px;}
