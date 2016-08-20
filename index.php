@@ -11,6 +11,6 @@ include "app/detect.php";
 if ($browser_t == 'web') {
 	header( 'Location: web/index.html');
 }else{
-	header( 'Location: http://m.dharminshah.com/smartphone/index.html');
+	header( 'Location: smartphone/index.html');
 }
 ?>
