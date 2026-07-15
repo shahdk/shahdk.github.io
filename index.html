@@ -123,6 +123,13 @@
     .dock a.resume{color:var(--accent-2);}
     .dock a.resume.active{color:var(--on-accent);}
     @media(max-width:520px){.dock a span{display:none;}.dock a{padding:11px;} .dock a.resume span{display:inline;}}
+    /* ── desktop: switch the dock to a vertical left-side pane ── */
+    @media(min-width:1240px){
+      .dock{top:50%;bottom:auto;left:28px;transform:translateY(-50%);
+        flex-direction:column;align-items:stretch;gap:4px;padding:10px;
+        border-radius:18px;max-width:none;overflow:visible;min-width:152px;}
+      .dock a{justify-content:flex-start;border-radius:12px;padding:10px 16px;}
+    }
   </style>
 </head>
 <body>
@@ -252,9 +259,9 @@
         <a class="card" href="https://github.com/shahdk/my-personal-finance-dashboard" target="_blank" rel="noopener"><h3>Personal Finance Dashboard</h3><p>Streamlit + PostgreSQL + LLM agents for insights and NL querying.</p><span class="chip">Python</span><span class="chip">LLM</span><div><span class="go">GitHub →</span></div></a>
         <a class="card" href="https://github.com/shahdk/oura-dash" target="_blank" rel="noopener"><h3>Oura Dash</h3><p>A drill-down dashboard over an Oura ring export, along with a GPS map, and a generated narrative in two voices: a clinical doctor's note with a playful doctor's thought in the margin.</p><span class="chip">Tool</span><div><span class="go">GitHub →</span></div></a>
         <a class="card" href="https://github.com/shahdk/real-estate-scout-agent" target="_blank" rel="noopener"><h3>Real Estate Scouting Agent</h3><p>Autonomous agent scouting Redfin, analyzing images, estimating costs.</p><span class="chip">Agent</span><span class="chip">Vision</span><div><span class="go">GitHub →</span></div></a>
-        <a class="card" href="/azul-scorer/"><h3>Azul Scorer</h3><p>Hosted static web app for scoring the board game Azul — live on this site.</p><span class="chip">Live site</span><div><span class="go">Open app →</span></div></a>
+        <a class="card" href="azul-scorer/index.html"><h3>Azul Scorer</h3><p>Hosted static web app for scoring the board game Azul — live on this site.</p><span class="chip">Live site</span><div><span class="go">Open app →</span></div></a>
         <a class="card" href="https://costofmoving.vercel.app/" target="_blank" rel="noopener"><h3>Cost of Moving Calculator</h3><p>Models taxes &amp; cost-of-living for the true cost of relocating in the US.</p><span class="chip">Tool</span><div><span class="go">Open app →</span></div></a>
-        <a class="card" href="/weeklymunch/" target="_blank" rel="noopener"><h3>Weeklymunch</h3><p>My recipe website</p><span class="chip">Blog</span><div><span class="go">Open app →</span></div></a>
+        <a class="card" href="weeklymunch/index.html" target="_blank" rel="noopener"><h3>Weeklymunch</h3><p>My recipe website</p><span class="chip">Blog</span><div><span class="go">Open app →</span></div></a>
       </div>
     </div>
   </section>
@@ -274,7 +281,7 @@
       <div>
         <p class="kicker">Talks &amp; writing</p>
         <div class="mini">
-          <div class="row"><h3>“AI Safety and Security”</h3><p>Guest Speaker · Rose-Hulman Institute of Technology</p><p><a href="https://www.youtube.com/watch?v=aW06_vyL7T8">Watch Recording</a></p></div>
+          <div class="row"><h3>“AI Safety and Security”</h3><p>Guest Speaker · Rose-Hulman Institute of Technology</p><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aW06_vyL7T8">Watch Recording</a></p></div>
         </div>
       </div>
       <div>
@@ -289,9 +296,8 @@
 
   <footer>
     <div class="wrap">
-      <p><a href="mailto:shah.dharmin.k@gmail.com">shah.dharmin.k@gmail.com</a> ·
-        <a href="https://github.com/shahdk" target="_blank" rel="noopener">github.com/shahdk</a></p>
       <p>© <span id="yr"></span> Dharmin Shah</p>
+      <p>co-created with Claude</p>
     </div>
   </footer>
 
