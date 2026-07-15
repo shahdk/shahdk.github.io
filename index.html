@@ -1,281 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/x-icon" href="favicon.jpeg">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <script defer src="script.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2TV35HZ8XC"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Dharmin Shah — Principal Software Engineer</title>
+  <meta name="description" content="Dharmin Shah — Principal Software Engineer & engineering leader. AI safety, security, and large-scale data platforms." />
+  <script>
+    /* set theme before paint to avoid a flash */
+    (function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <style>
+    /* ── light theme (default) ── */
+    :root{
+      --ink:#191f2b; --muted:#5b6577; --soft:#8b95a5; --lead:#3a4453;
+      --accent:#0aa06e; --accent-2:#0b7d57; --accent-soft:#e6f6ef; --on-accent:#ffffff;
+      --line:#e7eaf0; --bg:#fbfcfe; --card:#ffffff; --pill-bg:#eef3f0; --btn-bg:#ffffff;
+      --dock-bg:rgba(255,255,255,.82); --dock-border:rgba(20,30,50,.08); --dock-hover:rgba(20,30,50,.05);
+    }
+    /* ── dark theme ── */
+    :root[data-theme="dark"]{
+      --ink:#e9eef6; --muted:#9aa6b8; --soft:#6f7b8d; --lead:#c3ccd8;
+      --accent:#15c088; --accent-2:#45d7a4; --accent-soft:rgba(21,192,136,.12); --on-accent:#06231a;
+      --line:#26303f; --bg:#0d1218; --card:#151c26; --pill-bg:#1a222e; --btn-bg:#151c26;
+      --dock-bg:rgba(19,25,34,.82); --dock-border:rgba(255,255,255,.09); --dock-hover:rgba(255,255,255,.06);
+    }
+    @media (prefers-color-scheme: dark){
+      :root:not([data-theme]){
+        --ink:#e9eef6; --muted:#9aa6b8; --soft:#6f7b8d; --lead:#c3ccd8;
+        --accent:#15c088; --accent-2:#45d7a4; --accent-soft:rgba(21,192,136,.12); --on-accent:#06231a;
+        --line:#26303f; --bg:#0d1218; --card:#151c26; --pill-bg:#1a222e; --btn-bg:#151c26;
+        --dock-bg:rgba(19,25,34,.82); --dock-border:rgba(255,255,255,.09); --dock-hover:rgba(255,255,255,.06);
+      }
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{margin:0;background:var(--bg);color:var(--ink);transition:background .25s,color .25s;
+      font:16.5px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+    a{color:var(--accent-2);text-decoration:none;}
+    .wrap{max-width:860px;margin:0 auto;padding:0 22px;}
 
-      gtag('config', 'G-2TV35HZ8XC');
-    </script>
-    <title>Azul Scorer</title>
+    header.hero{text-align:center;padding:76px 0 30px;}
+    .hero h1{font-size:46px;line-height:1.06;letter-spacing:-0.03em;margin:0 0 10px;}
+    .hero .role{font-size:19px;color:var(--muted);margin:0 0 12px;}
+    .hero .sub{max-width:600px;margin:0 auto 24px;color:var(--muted);font-size:16px;}
+    .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-size:14.5px;font-weight:600;border:1px solid var(--line);color:var(--ink);background:var(--btn-bg);transition:.15s;}
+    .btn:hover{border-color:var(--accent);color:var(--accent-2);}
+    .btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);}
+    .btn.primary:hover{filter:brightness(1.06);color:var(--on-accent);}
+    .btn.icon{padding:11px;gap:0;}
+    .btn.icon svg{width:19px;height:19px;display:block;}
+    /* brand colours (kept on hover) */
+    .btn.gh,.btn.gh:hover{color:#24292f;}
+    .btn.li,.btn.li:hover{color:#0a66c2;}
+    :root[data-theme="dark"] .btn.gh,:root[data-theme="dark"] .btn.gh:hover{color:#e6edf3;}
+    @media (prefers-color-scheme: dark){:root:not([data-theme]) .btn.gh,:root:not([data-theme]) .btn.gh:hover{color:#e6edf3;}}
+
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:36px 0 0;}
+    @media(max-width:700px){.metrics{grid-template-columns:1fr 1fr;}}
+    .metric{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-align:left;position:relative;overflow:hidden;}
+    .metric::after{content:"";position:absolute;right:-20px;top:-20px;width:70px;height:70px;border-radius:50%;background:var(--accent-soft);}
+    .metric .n{font-size:26px;font-weight:750;letter-spacing:-0.02em;position:relative;}
+    .metric .l{font-size:12.5px;color:var(--muted);margin-top:6px;position:relative;}
+
+    section{padding:46px 0;}
+    .kicker{text-transform:uppercase;letter-spacing:.15em;font-size:12px;font-weight:700;color:var(--accent-2);margin:0 0 14px;}
+    h2{font-size:26px;letter-spacing:-0.02em;margin:0 0 22px;}
+    p.lead{font-size:18px;color:var(--lead);margin:0;}
+
+    .job{padding:20px 0;border-top:1px solid var(--line);}
+    .job:first-of-type{border-top:none;padding-top:0;}
+    .job .head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline;}
+    .job h3{margin:0;font-size:17px;}
+    .job .org{color:var(--accent-2);font-weight:600;font-size:14px;margin:3px 0 0;}
+    .job .when{color:var(--soft);font-size:13px;white-space:nowrap;}
+    .job ul{margin:11px 0 0;padding-left:18px;color:var(--muted);font-size:15px;}
+    .job li{margin-bottom:6px;}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+    .card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;transition:.15s;color:inherit;}
+    .card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 12px 28px rgba(10,120,80,.10);}
+    .card:hover .go{color:var(--accent-2);}
+    .card h3{margin:0 0 6px;font-size:16px;}
+    .card p{margin:0 0 12px;color:var(--muted);font-size:14px;}
+    .chip{display:inline-block;font-size:11.5px;color:var(--accent-2);background:var(--accent-soft);border-radius:6px;padding:3px 8px;margin:0 5px 5px 0;}
+    .card .go{display:inline-block;font-size:13.5px;font-weight:600;color:var(--accent-2);}
+
+    .skills-block{margin-bottom:16px;}
+    .skills-block .label{font-size:13px;font-weight:700;margin-bottom:8px;}
+    .prow{display:flex;flex-wrap:wrap;gap:8px;}
+    .pill{font-size:13px;color:var(--muted);background:var(--pill-bg);border:1px solid var(--line);border-radius:999px;padding:5px 12px;}
+
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+    @media(max-width:640px){.two{grid-template-columns:1fr;gap:24px;}}
+    .mini .row{margin-bottom:14px;}
+    .mini h3{margin:0 0 3px;font-size:15.5px;}
+    .mini p{margin:0;color:var(--muted);font-size:14px;}
+
+    footer{padding:36px 0 140px;text-align:center;color:var(--soft);font-size:14px;}
+    footer a{color:var(--muted);}
+
+    /* ── theme toggle (top-right) ── */
+    .theme-toggle{position:fixed;top:18px;right:18px;z-index:60;width:44px;height:44px;border-radius:50%;
+      border:1px solid var(--dock-border);background:var(--dock-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);
+      box-shadow:0 6px 20px rgba(20,40,60,.14);transition:.15s;}
+    .theme-toggle:hover{border-color:var(--accent);color:var(--accent-2);transform:translateY(-1px);}
+    .theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+    /* ── floating dock nav — visible on every viewport ── */
+    .dock{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:50;
+      display:flex;align-items:center;gap:2px;padding:7px;border-radius:999px;
+      background:var(--dock-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--dock-border);
+      box-shadow:0 12px 40px rgba(20,40,60,.16);max-width:calc(100vw - 24px);overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;}
+    .dock::-webkit-scrollbar{display:none;}
+    .dock a{display:flex;align-items:center;gap:7px;padding:9px 15px;border-radius:999px;font-size:14px;font-weight:600;color:var(--muted);white-space:nowrap;transition:.15s;}
+    .dock a svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;}
+    .dock a:hover{color:var(--ink);background:var(--dock-hover);}
+    .dock a.active{color:var(--on-accent);background:var(--accent);}
+    .dock a.resume{color:var(--accent-2);}
+    .dock a.resume.active{color:var(--on-accent);}
+    @media(max-width:520px){.dock a span{display:none;}.dock a{padding:11px;} .dock a.resume span{display:inline;}}
+  </style>
 </head>
 <body>
-<main>
-    <div class="desktop header">
-        <div style="padding-bottom:25px;">
-            <span>Score:&ensp;</span>
-            <span class="p1 score current">0</span>
-            <span class="p2 score">0</span>
-            <span class="p3 score">0</span>
-            <span class="p4 score">0</span>
-        </div>
-        <div>
-            <table class="p1 current">
-                    <tr>
-                        <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
-                        <td class="negative-score negative-score-p1">0</td>
-                        <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
-                    </tr>
-            </table>
-            <table class="p2">
-                <tr>
-                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
-                    <td class="negative-score negative-score-p2">0</td>
-                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
-                </tr>
-            </table>
-            <table class="p3">
-                <tr>
-                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
-                    <td class="negative-score negative-score-p3">0</td>
-                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
-                </tr>
-            </table>
-            <table class="p4">
-                <tr>
-                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
-                    <td class="negative-score negative-score-p4">0</td>
-                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
-                </tr>
-            </table>
-        </div>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode"></button>
+
+  <header class="hero" id="about">
+    <div class="wrap">
+      <h1>Dharmin Shah</h1>
+      <p class="role">Principal Software Engineer &amp; Engineering Leader</p>
+      <p class="sub">A decade in security engineering — threat intelligence, email security, and AI safety.
+        I turn ambiguous safety problems into shipped, measurable platforms.</p>
+      <div class="actions">
+        <a class="btn icon" href="mailto:shah.dharmin.k@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        <a class="btn icon gh" href="https://github.com/shahdk" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5a10.5 10.5 0 00-3.32 20.47c.52.1.71-.23.71-.5v-1.77c-2.9.63-3.52-1.4-3.52-1.4-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.14 3.05.87.09-.68.36-1.14.66-1.4-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.4-2.07 1.08-2.8-.11-.27-.47-1.33.1-2.77 0 0 .88-.28 2.88 1.07a9.9 9.9 0 015.24 0c2-1.35 2.88-1.07 2.88-1.07.57 1.44.21 2.5.1 2.77.67.73 1.07 1.66 1.07 2.8 0 4.01-2.44 4.9-4.77 5.16.37.32.7.95.7 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0012 1.5z"/></svg></a>
+        <a class="btn icon li" href="https://www.linkedin.com/in/shah-dharmin-k" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a class="btn icon" href="/assets/Dharmin-Shah-Resume.pdf" download aria-label="Download résumé (PDF)" title="Download résumé (PDF)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg></a>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="n">1B+</div><div class="l">records/day across 60+ AI services ingested into data platform</div></div>
+        <div class="metric"><div class="n">4+ yrs</div><div class="l">as Engineering Manager &amp; Tech Lead</div></div>
+        <div class="metric"><div class="n">11+ yrs</div><div class="l">experience in security &amp; data platforms</div></div>
+        <div class="metric"><div class="n">8+</div><div class="l">engineers led &amp; grown</div></div>
+      </div>
     </div>
-    <div class="mobile">
-        <div style="padding-bottom:25px;">
-            <span>Score:&ensp;</span>
-            <span class="p1 score current">0</span>
-            <span class="p2 score">0</span>
-            <span class="p3 score">0</span>
-            <span class="p4 score">0</span>
-        </div>
-        <div>
-            <table class="p1 current">
-                <tr>
-                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
-                    <td class="negative-score negative-score-p1">0</td>
-                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
-                </tr>
-            </table>
-            <table class="p2">
-                <tr>
-                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
-                    <td class="negative-score negative-score-p2">0</td>
-                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
-                </tr>
-            </table>
-            <table class="p3">
-                <tr>
-                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
-                    <td class="negative-score negative-score-p3">0</td>
-                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
-                </tr>
-            </table>
-            <table class="p4">
-                <tr>
-                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
-                    <td class="negative-score negative-score-p4">0</td>
-                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
-                </tr>
-            </table>
-        </div>
+  </header>
+
+  <section id="experience">
+    <div class="wrap">
+      <p class="kicker">Experience</p>
+      <div class="job">
+        <div class="head"><div><h3>Staff Software Engineer</h3><p class="org">Ent Security</p></div><span class="when">July 2026 – Present</span></div>
+        <ul>
+            <li>Staff Software Engineer at Ent.ai</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Principal Software Engineer</h3><p class="org">Microsoft — AI Safety Platform</p></div><span class="when">Apr 2025 – Jul 2026</span></div>
+        <ul>
+          <li>Architected a greenfield AI safety data platform (Azure Databricks, Data Factory, Data Explorer) ingesting <strong>1B+ records/day</strong> of
+          threat telemetry from <strong>60+ AI services</strong>, delivering a unified cross-model view of AI threats and tracking <strong>20+ safety metrics</strong> —
+          including attack rates for direct and indirect prompt injection and jailbreaks.</li>
+          <li>Built a natural-language threat-hunting agent (Python, Java) that converts analyst queries to KQL and autonomously executes
+          follow-up queries via RAG — cutting investigation time <strong>from weeks to hours</strong> and enabling Microsoft's Digital Crimes Unit to
+          continuously monitor threat-actor infrastructure so investigators could focus on the hunt itself.</li>
+          <li>Built an MCP server for security stress-testing of AI systems; partnered with safety researchers and product teams to
+          translate ambiguous safety concerns into automated, evaluable detection signals.</li>
+          <li>Defined product SLOs/SLAs and built observability dashboards and incident-response workflows for Tier-0 safety pipelines;
+          advised partner teams on building their AI infrastructure and products securely.</li>
+          <li>Contributed to <a href="https://github.com/microsoft/clarity-agent">Clarity Agent</a>, a Microsoft open-source AI thinking partner that helps users reason through projects rather than
+          jumping straight to answers.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Engineering Manager / Principal Engineering Manager</h3><p class="org">Microsoft — Unified Security Intelligence</p></div><span class="when">Mar 2022 – Apr 2025</span></div>
+        <ul>
+          <li>Managed a <strong>distributed team of 8 engineers</strong> building data collection systems across petabyte-scale intelligence stores; grew
+          the team by promoting multiple engineers from junior to senior and one senior engineer to staff.</li>
+          <li>Led re-architecture of global backend data pipelines (Java, Spark, Kafka) processing TB-scale threat intelligence, improving
+          data freshness from <strong>80% coverage in 60 days to 95% in 14 days.</strong></li>
+          <li>Cut production incident (IcM) tickets from <strong>several hundreds to sub-hundreds</strong> by shipping self-healing systems and better
+          error handling — transforming on-call from an SME-dependent burden into a rotation any engineer could triage
+          independently.</li>
+          <li>Drove datacenter-to-cloud migration and established SLA tracking, alerting, and centralized observability, reducing data
+          refresh from 100+ days to 14 days for 95% of domains.</li>
+          <li>Defined technical vision for region-agnostic deployments and automated production operations, eliminating hundreds of
+          manual engineering touches per quarter.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Engineering Manager</h3><p class="org">Proofpoint Inc.</p></div><span class="when">Jul 2021 – Mar 2022</span></div>
+        <ul>
+            <li>Led a four-person team improving API performance, user experience, and service uptime for enterprise email security products.</li>
+            <li>Established career development goals and plans for the team.</li>
+            <li>Identified API performance issues and set-up a plan for the team to improve them.</li>
+            <li>Performed on-call duties to maintain the up-time for the service.</li>
+            <li>Set the product roadmap, balanced feature development against technical-debt reduction, and drove clear next steps across cross-functional stakeholders in an ambiguous environment.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Senior Software Engineer</h3><p class="org">Proofpoint Inc.</p></div><span class="when">Jun 2017 – Jun 2021</span></div>
+        <ul>
+          <li>Nexus Threat Graph (NTX): built a multi-TB distributed security data platform from scratch (Java, HBase/Phoenix, Cassandra, Redis) — data models, REST APIs, CI/CD, and infrastructure. Authored the testing framework (0% → 30% coverage, 70% faster execution) and drove Python threat clustering to production.</li>
+          <li>CLEAR (email threat analysis & response): designed Scala APIs orchestrating cross-system email scanning via AWS SQS/S3, with PostgreSQL/Aurora analytics powering customer dashboards; partnered with Data Science on Spark pipelines processing 10 TB.</li>
+          <li>Co-developed Terraform standards and AWS deployment tooling (S3, SQS, DynamoDB, Aurora) adopted across engineering teams.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Software Engineer</h3><p class="org">Proofpoint Inc.</p></div><span class="when">Jun 2015 – Jun 2017</span></div>
+        <ul>
+            <li>As part of a two-person team, built a sales-enablement tool demonstrating product efficacy — a Scala API backed by Cassandra to query threat intelligence for any URL or email attachment; later merged into NTX, where it remains in production with minimal maintenance.</li>
+            <li>Built the UI and API (Scala / Play framework) delivering network threat intelligence to enterprise customers.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Part-time Software Engineer</h3><p class="org">Rose-Hulman Institute of Technology</p></div><span class="when">Sep 2012 – Jun 2015</span></div>
+        <ul>
+            <li>Rehired by Institutional Research and Program Assessment (IRPA) Department to continue developing the summer internship project, and developing other initiatives for the department.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Software Engineer Intern</h3><p class="org">Avalon Consulting, LLC</p></div><span class="when">Jun 2014 – Aug 2014</span></div>
+        <ul>
+            <li>Worked with Hadoop technologies on Twitter Sentiment Analysis and Weather Data analysis projects. Used Apache Storm and HBase for Twitter Sentiment Analysis, and Apache Pig and Hive for the Weather Data analysis project.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Software Engineer Intern</h3><p class="org">Software Engineering Professionals (SEP)</p></div><span class="when">Jun 2013 – Aug 2013</span></div>
+        <ul>
+            <li>Developed an iPad app for relationship management called meHive.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="head"><div><h3>Software Engineer Intern</h3><p class="org">Rose-Hulman Ventures</p></div><span class="when">May 2012 – Aug 2012</span></div>
+        <ul>
+            <li>Worked on a Web application tool to help teachers rate students' documents on outcomes like ethics and teamwork. Worked with C#, ASP.NET, PHP, MySQL.</li>
+        </ul>
+      </div>
     </div>
-    <div class="board">
-        <div class="nav">
-            <i onclick="switchPlayer(false)" class="fa fa-arrow-left prev" style="display:block;"></i>
-        </div>
-        <table class="p1 current">
-            <tr>
-                <td id="p1-0-0" class="blue-tile"></td>
-                <td id="p1-0-1" class="yellow-tile"></td>
-                <td id="p1-0-2" class="red-tile"></td>
-                <td id="p1-0-3" class="black-tile"></td>
-                <td id="p1-0-4" class="white-tile"></td>
-            </tr>
-            <tr>
-                <td id="p1-1-0" class="white-tile"></td>
-                <td id="p1-1-1" class="blue-tile"></td>
-                <td id="p1-1-2" class="yellow-tile"></td>
-                <td id="p1-1-3" class="red-tile"></td>
-                <td id="p1-1-4" class="black-tile"></td>
-            </tr>
-            <tr>
-                <td id="p1-2-0" class="black-tile"></td>
-                <td id="p1-2-1" class="white-tile"></td>
-                <td id="p1-2-2" class="blue-tile"></td>
-                <td id="p1-2-3" class="yellow-tile"></td>
-                <td id="p1-2-4" class="red-tile"></td>
-            </tr>
-            <tr>
-                <td id="p1-3-0" class="red-tile"></td>
-                <td id="p1-3-1" class="black-tile"></td>
-                <td id="p1-3-2" class="white-tile"></td>
-                <td id="p1-3-3" class="blue-tile"></td>
-                <td id="p1-3-4" class="yellow-tile"></td>
-            </tr>
-            <tr>
-                <td id="p1-4-0" class="yellow-tile"></td>
-                <td id="p1-4-1" class="red-tile"></td>
-                <td id="p1-4-2" class="black-tile"></td>
-                <td id="p1-4-3" class="white-tile"></td>
-                <td id="p1-4-4" class="blue-tile"></td>
-            </tr>
-        </table>
-        <table class="p2">
-            <tr>
-                <td id="p2-0-0" class="blue-tile"></td>
-                <td id="p2-0-1" class="yellow-tile"></td>
-                <td id="p2-0-2" class="red-tile"></td>
-                <td id="p2-0-3" class="black-tile"></td>
-                <td id="p2-0-4" class="white-tile"></td>
-            </tr>
-            <tr>
-                <td id="p2-1-0" class="white-tile"></td>
-                <td id="p2-1-1" class="blue-tile"></td>
-                <td id="p2-1-2" class="yellow-tile"></td>
-                <td id="p2-1-3" class="red-tile"></td>
-                <td id="p2-1-4" class="black-tile"></td>
-            </tr>
-            <tr>
-                <td id="p2-2-0" class="black-tile"></td>
-                <td id="p2-2-1" class="white-tile"></td>
-                <td id="p2-2-2" class="blue-tile"></td>
-                <td id="p2-2-3" class="yellow-tile"></td>
-                <td id="p2-2-4" class="red-tile"></td>
-            </tr>
-            <tr>
-                <td id="p2-3-0" class="red-tile"></td>
-                <td id="p2-3-1" class="black-tile"></td>
-                <td id="p2-3-2" class="white-tile"></td>
-                <td id="p2-3-3" class="blue-tile"></td>
-                <td id="p2-3-4" class="yellow-tile"></td>
-            </tr>
-            <tr>
-                <td id="p2-4-0" class="yellow-tile"></td>
-                <td id="p2-4-1" class="red-tile"></td>
-                <td id="p2-4-2" class="black-tile"></td>
-                <td id="p2-4-3" class="white-tile"></td>
-                <td id="p2-4-4" class="blue-tile"></td>
-            </tr>
-        </table>
-        <table class="p3">
-            <tr>
-                <td id="p3-0-0" class="blue-tile"></td>
-                <td id="p3-0-1" class="yellow-tile"></td>
-                <td id="p3-0-2" class="red-tile"></td>
-                <td id="p3-0-3" class="black-tile"></td>
-                <td id="p3-0-4" class="white-tile"></td>
-            </tr>
-            <tr>
-                <td id="p3-1-0" class="white-tile"></td>
-                <td id="p3-1-1" class="blue-tile"></td>
-                <td id="p3-1-2" class="yellow-tile"></td>
-                <td id="p3-1-3" class="red-tile"></td>
-                <td id="p3-1-4" class="black-tile"></td>
-            </tr>
-            <tr>
-                <td id="p3-2-0" class="black-tile"></td>
-                <td id="p3-2-1" class="white-tile"></td>
-                <td id="p3-2-2" class="blue-tile"></td>
-                <td id="p3-2-3" class="yellow-tile"></td>
-                <td id="p3-2-4" class="red-tile"></td>
-            </tr>
-            <tr>
-                <td id="p3-3-0" class="red-tile"></td>
-                <td id="p3-3-1" class="black-tile"></td>
-                <td id="p3-3-2" class="white-tile"></td>
-                <td id="p3-3-3" class="blue-tile"></td>
-                <td id="p3-3-4" class="yellow-tile"></td>
-            </tr>
-            <tr>
-                <td id="p3-4-0" class="yellow-tile"></td>
-                <td id="p3-4-1" class="red-tile"></td>
-                <td id="p3-4-2" class="black-tile"></td>
-                <td id="p3-4-3" class="white-tile"></td>
-                <td id="p3-4-4" class="blue-tile"></td>
-            </tr>
-        </table>
-        <table class="p4">
-            <tr>
-                <td id="p4-0-0" class="blue-tile"></td>
-                <td id="p4-0-1" class="yellow-tile"></td>
-                <td id="p4-0-2" class="red-tile"></td>
-                <td id="p4-0-3" class="black-tile"></td>
-                <td id="p4-0-4" class="white-tile"></td>
-            </tr>
-            <tr>
-                <td id="p4-1-0" class="white-tile"></td>
-                <td id="p4-1-1" class="blue-tile"></td>
-                <td id="p4-1-2" class="yellow-tile"></td>
-                <td id="p4-1-3" class="red-tile"></td>
-                <td id="p4-1-4" class="black-tile"></td>
-            </tr>
-            <tr>
-                <td id="p4-2-0" class="black-tile"></td>
-                <td id="p4-2-1" class="white-tile"></td>
-                <td id="p4-2-2" class="blue-tile"></td>
-                <td id="p4-2-3" class="yellow-tile"></td>
-                <td id="p4-2-4" class="red-tile"></td>
-            </tr>
-            <tr>
-                <td id="p4-3-0" class="red-tile"></td>
-                <td id="p4-3-1" class="black-tile"></td>
-                <td id="p4-3-2" class="white-tile"></td>
-                <td id="p4-3-3" class="blue-tile"></td>
-                <td id="p4-3-4" class="yellow-tile"></td>
-            </tr>
-            <tr>
-                <td id="p4-4-0" class="yellow-tile"></td>
-                <td id="p4-4-1" class="red-tile"></td>
-                <td id="p4-4-2" class="black-tile"></td>
-                <td id="p4-4-3" class="white-tile"></td>
-                <td id="p4-4-4" class="blue-tile"></td>
-            </tr>
-        </table>
-        <div class="nav">
-            <i onclick="switchPlayer(true)" class="fa fa-arrow-right next" style="display:block;"></i>
-        </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <p class="kicker">Open source &amp; projects</p>
+      <div class="grid">
+        <a class="card" href="https://github.com/microsoft/clarity-agent/" target="_blank" rel="noopener"><h3>Clarity Agent</h3><p>Microsoft open-source AI thinking partner for reasoning through projects.</p><span class="chip">Open source</span><span class="chip">AI</span><div><span class="go">GitHub →</span></div></a>
+        <a class="card" href="https://github.com/shahdk/fishbone-generator" target="_blank" rel="noopener"><h3>Fishbone Generator</h3><p>AI threat-modeling using a fishbone-diagram approach to analyze risk.</p><span class="chip">Security</span><span class="chip">AI</span><div><span class="go">GitHub →</span></div></a>
+        <a class="card" href="https://github.com/shahdk/my-personal-finance-dashboard" target="_blank" rel="noopener"><h3>Personal Finance Dashboard</h3><p>Streamlit + PostgreSQL + LLM agents for insights and NL querying.</p><span class="chip">Python</span><span class="chip">LLM</span><div><span class="go">GitHub →</span></div></a>
+        <a class="card" href="https://github.com/shahdk/oura-dash" target="_blank" rel="noopener"><h3>Oura Dash</h3><p>A drill-down dashboard over an Oura ring export, along with a GPS map, and a generated narrative in two voices: a clinical doctor's note with a playful doctor's thought in the margin.</p><span class="chip">Tool</span><div><span class="go">GitHub →</span></div></a>
+        <a class="card" href="https://github.com/shahdk/real-estate-scout-agent" target="_blank" rel="noopener"><h3>Real Estate Scouting Agent</h3><p>Autonomous agent scouting Redfin, analyzing images, estimating costs.</p><span class="chip">Agent</span><span class="chip">Vision</span><div><span class="go">GitHub →</span></div></a>
+        <a class="card" href="/azul-scorer/"><h3>Azul Scorer</h3><p>Hosted static web app for scoring the board game Azul — live on this site.</p><span class="chip">Live site</span><div><span class="go">Open app →</span></div></a>
+        <a class="card" href="https://costofmoving.vercel.app/" target="_blank" rel="noopener"><h3>Cost of Moving Calculator</h3><p>Models taxes &amp; cost-of-living for the true cost of relocating in the US.</p><span class="chip">Tool</span><div><span class="go">Open app →</span></div></a>
+        <a class="card" href="/weeklymunch/" target="_blank" rel="noopener"><h3>Weeklymunch</h3><p>My recipe website</p><span class="chip">Blog</span><div><span class="go">Open app →</span></div></a>
+      </div>
     </div>
-    <div class="desktop">
-        <div class="footer">
-            <div class="p1 current">Player 1</div>
-            <div class="p2">Player 2</div>
-            <div class="p3">Player 3</div>
-            <div class="p4">Player 4</div>
-        </div>
-        <div><i onclick="reset()" class="fa fa-refresh reset"></i></div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <p class="kicker">Skills &amp; technologies</p>
+      <div class="skills-block"><div class="label">Languages &amp; frameworks</div><div class="prow"><span class="pill">Python</span><span class="pill">Java</span><span class="pill">Scala</span><span class="pill">SQL</span><span class="pill">REST / GraphQL</span><span class="pill">Spring Boot</span><span class="pill">Node.js</span></div></div>
+      <div class="skills-block"><div class="label">AI &amp; security</div><div class="prow"><span class="pill">LLM agents</span><span class="pill">RAG</span><span class="pill">MCP servers</span><span class="pill">Azure OpenAI</span><span class="pill">Prompt-injection detection</span></div></div>
+      <div class="skills-block"><div class="label">Cloud &amp; infrastructure</div><div class="prow"><span class="pill">AWS</span><span class="pill">Azure</span><span class="pill">Kubernetes</span><span class="pill">Docker</span><span class="pill">Terraform</span><span class="pill">Bicep</span></div></div>
+      <div class="skills-block"><div class="label">Data &amp; distributed systems</div><div class="prow"><span class="pill">Spark</span><span class="pill">Kafka</span><span class="pill">Hadoop</span><span class="pill">HBase/Phoenix</span><span class="pill">Cassandra</span><span class="pill">PostgreSQL</span><span class="pill">Redis</span></div></div>
     </div>
-    <div class="mobile">
-        <div class="footer">
-            <div class="p1 current">Player 1</div>
-            <div class="p2">Player 2</div>
-            <div class="p3">Player 3</div>
-            <div class="p4">Player 4</div>
+  </section>
+
+  <section id="more">
+    <div class="wrap two">
+      <div>
+        <p class="kicker">Talks &amp; writing</p>
+        <div class="mini">
+          <div class="row"><h3>“AI Safety and Security”</h3><p>Guest Speaker · Rose-Hulman Institute of Technology</p><p><a href="https://www.youtube.com/watch?v=aW06_vyL7T8">Watch Recording</a></p></div>
         </div>
-        <div><i onclick="reset()" class="fa fa-refresh reset"></i></div>
+      </div>
+      <div>
+        <p class="kicker">Education</p>
+        <div class="mini">
+          <div class="row"><h3>M.B.A.</h3><p>Indiana University, Kelley School of Business - 2026</p></div>
+          <div class="row"><h3>B.S., Computer Science &amp; Software Engineering</h3><p>Rose-Hulman · Summa Cum Laude - 2015</p></div>
+        </div>
+      </div>
     </div>
-</main>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p><a href="mailto:shah.dharmin.k@gmail.com">shah.dharmin.k@gmail.com</a> ·
+        <a href="https://github.com/shahdk" target="_blank" rel="noopener">github.com/shahdk</a></p>
+      <p>© <span id="yr"></span> Dharmin Shah</p>
+    </div>
+  </footer>
+
+  <nav class="dock">
+    <a href="#about" class="active"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>About</span></a>
+    <a href="#experience"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg><span>Work</span></a>
+    <a href="#projects"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Projects</span></a>
+    <a href="#skills"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg><span>Skills</span></a>
+    <a href="#more"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span>Education</span></a>
+    <a href="/assets/Dharmin-Shah-Resume.pdf" class="resume" download><svg viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg><span>Résumé</span></a>
+  </nav>
+
+  <script>
+    document.getElementById("yr").textContent=new Date().getFullYear();
+
+    /* ── theme toggle ── */
+    (function(){
+      var root=document.documentElement, btn=document.getElementById('themeToggle');
+      var sun='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.5v2.5M12 20v2.5M3.5 3.5l1.8 1.8M18.7 18.7l1.8 1.8M1.5 12h2.5M20 12h2.5M3.5 20.5l1.8-1.8M18.7 5.3l1.8-1.8"/></svg>';
+      var moon='<svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>';
+      function effective(){var a=root.getAttribute('data-theme');
+        return a?a:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+      function render(){var e=effective();btn.innerHTML=(e==='dark')?sun:moon;
+        btn.setAttribute('aria-label',(e==='dark')?'Switch to light mode':'Switch to dark mode');}
+      btn.addEventListener('click',function(){var next=(effective()==='dark')?'light':'dark';
+        root.setAttribute('data-theme',next);localStorage.setItem('theme',next);render();});
+      /* keep in sync with OS changes while no explicit choice is stored */
+      if(window.matchMedia){window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){
+        if(!localStorage.getItem('theme'))render();});}
+      render();
+    })();
+
+    /* ── scroll-spy for dock ── */
+    var ids=["about","experience","projects","skills","more"];
+    var secs=ids.map(function(i){return document.getElementById(i);}).filter(Boolean);
+    function setActive(id){
+      document.querySelectorAll('.dock a[href^="#"]').forEach(function(a){a.classList.remove('active');});
+      var a=document.querySelector('.dock a[href="#'+id+'"]');if(a)a.classList.add('active');
+    }
+    /* section under a reference line ~1/3 down the viewport, with top/bottom edge fallbacks */
+    function currentSection(){
+      var y=window.scrollY||window.pageYOffset;
+      if(y<=8)return ids[0];
+      if(window.innerHeight+y>=document.documentElement.scrollHeight-8)return ids[ids.length-1];
+      var line=y+window.innerHeight*0.33,cur=ids[0];
+      secs.forEach(function(s){if(s.offsetTop<=line)cur=s.id;});
+      return cur;
+    }
+    /* clicking a dock link locks the highlight onto the target through the smooth scroll,
+       so short sections (Work, Skills) that snap to the top still highlight correctly */
+    var lock=false,idle;
+    function releaseSoon(){clearTimeout(idle);idle=setTimeout(function(){lock=false;},140);}
+    function spy(){if(lock){releaseSoon();return;}setActive(currentSection());}
+    window.addEventListener('scroll',spy,{passive:true});
+    window.addEventListener('resize',spy);
+    document.querySelectorAll('.dock a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(){
+        setActive(a.getAttribute('href').slice(1));lock=true;releaseSoon();
+      });
+    });
+    spy();
+  </script>
 </body>
 </html>

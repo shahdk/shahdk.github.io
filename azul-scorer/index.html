@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.jpeg">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script defer src="script.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2TV35HZ8XC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2TV35HZ8XC');
+    </script>
+    <title>Azul Scorer</title>
+</head>
+<body>
+<main>
+    <div class="desktop header">
+        <div style="padding-bottom:25px;">
+            <span>Score:&ensp;</span>
+            <span class="p1 score current">0</span>
+            <span class="p2 score">0</span>
+            <span class="p3 score">0</span>
+            <span class="p4 score">0</span>
+        </div>
+        <div>
+            <table class="p1 current">
+                    <tr>
+                        <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
+                        <td class="negative-score negative-score-p1">0</td>
+                        <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
+                    </tr>
+            </table>
+            <table class="p2">
+                <tr>
+                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
+                    <td class="negative-score negative-score-p2">0</td>
+                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
+                </tr>
+            </table>
+            <table class="p3">
+                <tr>
+                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
+                    <td class="negative-score negative-score-p3">0</td>
+                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
+                </tr>
+            </table>
+            <table class="p4">
+                <tr>
+                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
+                    <td class="negative-score negative-score-p4">0</td>
+                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="mobile">
+        <div style="padding-bottom:25px;">
+            <span>Score:&ensp;</span>
+            <span class="p1 score current">0</span>
+            <span class="p2 score">0</span>
+            <span class="p3 score">0</span>
+            <span class="p4 score">0</span>
+        </div>
+        <div>
+            <table class="p1 current">
+                <tr>
+                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
+                    <td class="negative-score negative-score-p1">0</td>
+                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
+                </tr>
+            </table>
+            <table class="p2">
+                <tr>
+                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
+                    <td class="negative-score negative-score-p2">0</td>
+                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
+                </tr>
+            </table>
+            <table class="p3">
+                <tr>
+                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
+                    <td class="negative-score negative-score-p3">0</td>
+                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
+                </tr>
+            </table>
+            <table class="p4">
+                <tr>
+                    <td class="negative plus-1"><i class="fa fa-undo plus-1"></i></td>
+                    <td class="negative-score negative-score-p4">0</td>
+                    <td class="negative minus-1"><i class="fa fa-minus minus-1"></i></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="board">
+        <div class="nav">
+            <i onclick="switchPlayer(false)" class="fa fa-arrow-left prev" style="display:block;"></i>
+        </div>
+        <table class="p1 current">
+            <tr>
+                <td id="p1-0-0" class="blue-tile"></td>
+                <td id="p1-0-1" class="yellow-tile"></td>
+                <td id="p1-0-2" class="red-tile"></td>
+                <td id="p1-0-3" class="black-tile"></td>
+                <td id="p1-0-4" class="white-tile"></td>
+            </tr>
+            <tr>
+                <td id="p1-1-0" class="white-tile"></td>
+                <td id="p1-1-1" class="blue-tile"></td>
+                <td id="p1-1-2" class="yellow-tile"></td>
+                <td id="p1-1-3" class="red-tile"></td>
+                <td id="p1-1-4" class="black-tile"></td>
+            </tr>
+            <tr>
+                <td id="p1-2-0" class="black-tile"></td>
+                <td id="p1-2-1" class="white-tile"></td>
+                <td id="p1-2-2" class="blue-tile"></td>
+                <td id="p1-2-3" class="yellow-tile"></td>
+                <td id="p1-2-4" class="red-tile"></td>
+            </tr>
+            <tr>
+                <td id="p1-3-0" class="red-tile"></td>
+                <td id="p1-3-1" class="black-tile"></td>
+                <td id="p1-3-2" class="white-tile"></td>
+                <td id="p1-3-3" class="blue-tile"></td>
+                <td id="p1-3-4" class="yellow-tile"></td>
+            </tr>
+            <tr>
+                <td id="p1-4-0" class="yellow-tile"></td>
+                <td id="p1-4-1" class="red-tile"></td>
+                <td id="p1-4-2" class="black-tile"></td>
+                <td id="p1-4-3" class="white-tile"></td>
+                <td id="p1-4-4" class="blue-tile"></td>
+            </tr>
+        </table>
+        <table class="p2">
+            <tr>
+                <td id="p2-0-0" class="blue-tile"></td>
+                <td id="p2-0-1" class="yellow-tile"></td>
+                <td id="p2-0-2" class="red-tile"></td>
+                <td id="p2-0-3" class="black-tile"></td>
+                <td id="p2-0-4" class="white-tile"></td>
+            </tr>
+            <tr>
+                <td id="p2-1-0" class="white-tile"></td>
+                <td id="p2-1-1" class="blue-tile"></td>
+                <td id="p2-1-2" class="yellow-tile"></td>
+                <td id="p2-1-3" class="red-tile"></td>
+                <td id="p2-1-4" class="black-tile"></td>
+            </tr>
+            <tr>
+                <td id="p2-2-0" class="black-tile"></td>
+                <td id="p2-2-1" class="white-tile"></td>
+                <td id="p2-2-2" class="blue-tile"></td>
+                <td id="p2-2-3" class="yellow-tile"></td>
+                <td id="p2-2-4" class="red-tile"></td>
+            </tr>
+            <tr>
+                <td id="p2-3-0" class="red-tile"></td>
+                <td id="p2-3-1" class="black-tile"></td>
+                <td id="p2-3-2" class="white-tile"></td>
+                <td id="p2-3-3" class="blue-tile"></td>
+                <td id="p2-3-4" class="yellow-tile"></td>
+            </tr>
+            <tr>
+                <td id="p2-4-0" class="yellow-tile"></td>
+                <td id="p2-4-1" class="red-tile"></td>
+                <td id="p2-4-2" class="black-tile"></td>
+                <td id="p2-4-3" class="white-tile"></td>
+                <td id="p2-4-4" class="blue-tile"></td>
+            </tr>
+        </table>
+        <table class="p3">
+            <tr>
+                <td id="p3-0-0" class="blue-tile"></td>
+                <td id="p3-0-1" class="yellow-tile"></td>
+                <td id="p3-0-2" class="red-tile"></td>
+                <td id="p3-0-3" class="black-tile"></td>
+                <td id="p3-0-4" class="white-tile"></td>
+            </tr>
+            <tr>
+                <td id="p3-1-0" class="white-tile"></td>
+                <td id="p3-1-1" class="blue-tile"></td>
+                <td id="p3-1-2" class="yellow-tile"></td>
+                <td id="p3-1-3" class="red-tile"></td>
+                <td id="p3-1-4" class="black-tile"></td>
+            </tr>
+            <tr>
+                <td id="p3-2-0" class="black-tile"></td>
+                <td id="p3-2-1" class="white-tile"></td>
+                <td id="p3-2-2" class="blue-tile"></td>
+                <td id="p3-2-3" class="yellow-tile"></td>
+                <td id="p3-2-4" class="red-tile"></td>
+            </tr>
+            <tr>
+                <td id="p3-3-0" class="red-tile"></td>
+                <td id="p3-3-1" class="black-tile"></td>
+                <td id="p3-3-2" class="white-tile"></td>
+                <td id="p3-3-3" class="blue-tile"></td>
+                <td id="p3-3-4" class="yellow-tile"></td>
+            </tr>
+            <tr>
+                <td id="p3-4-0" class="yellow-tile"></td>
+                <td id="p3-4-1" class="red-tile"></td>
+                <td id="p3-4-2" class="black-tile"></td>
+                <td id="p3-4-3" class="white-tile"></td>
+                <td id="p3-4-4" class="blue-tile"></td>
+            </tr>
+        </table>
+        <table class="p4">
+            <tr>
+                <td id="p4-0-0" class="blue-tile"></td>
+                <td id="p4-0-1" class="yellow-tile"></td>
+                <td id="p4-0-2" class="red-tile"></td>
+                <td id="p4-0-3" class="black-tile"></td>
+                <td id="p4-0-4" class="white-tile"></td>
+            </tr>
+            <tr>
+                <td id="p4-1-0" class="white-tile"></td>
+                <td id="p4-1-1" class="blue-tile"></td>
+                <td id="p4-1-2" class="yellow-tile"></td>
+                <td id="p4-1-3" class="red-tile"></td>
+                <td id="p4-1-4" class="black-tile"></td>
+            </tr>
+            <tr>
+                <td id="p4-2-0" class="black-tile"></td>
+                <td id="p4-2-1" class="white-tile"></td>
+                <td id="p4-2-2" class="blue-tile"></td>
+                <td id="p4-2-3" class="yellow-tile"></td>
+                <td id="p4-2-4" class="red-tile"></td>
+            </tr>
+            <tr>
+                <td id="p4-3-0" class="red-tile"></td>
+                <td id="p4-3-1" class="black-tile"></td>
+                <td id="p4-3-2" class="white-tile"></td>
+                <td id="p4-3-3" class="blue-tile"></td>
+                <td id="p4-3-4" class="yellow-tile"></td>
+            </tr>
+            <tr>
+                <td id="p4-4-0" class="yellow-tile"></td>
+                <td id="p4-4-1" class="red-tile"></td>
+                <td id="p4-4-2" class="black-tile"></td>
+                <td id="p4-4-3" class="white-tile"></td>
+                <td id="p4-4-4" class="blue-tile"></td>
+            </tr>
+        </table>
+        <div class="nav">
+            <i onclick="switchPlayer(true)" class="fa fa-arrow-right next" style="display:block;"></i>
+        </div>
+    </div>
+    <div class="desktop">
+        <div class="footer">
+            <div class="p1 current">Player 1</div>
+            <div class="p2">Player 2</div>
+            <div class="p3">Player 3</div>
+            <div class="p4">Player 4</div>
+        </div>
+        <div><i onclick="reset()" class="fa fa-refresh reset"></i></div>
+    </div>
+    <div class="mobile">
+        <div class="footer">
+            <div class="p1 current">Player 1</div>
+            <div class="p2">Player 2</div>
+            <div class="p3">Player 3</div>
+            <div class="p4">Player 4</div>
+        </div>
+        <div><i onclick="reset()" class="fa fa-refresh reset"></i></div>
+    </div>
+</main>
+</body>
+</html>
