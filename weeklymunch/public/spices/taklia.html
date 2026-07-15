@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>Taklia — Weeklymunch</title>
+<script>(function(){var t=localStorage.getItem('wm-theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<style>
+  :root{
+    --bg:#faf9f7;--card:#ffffff;--ink:#1c1f24;--muted:#6d7680;--line:#e9e7e2;
+    --heat:#e4571f;--heat-soft:#fdeee6;--done:#12a06b;--done-soft:#eaf7f1;--chip:#f1efeb;
+    --shadow:rgba(30,28,24,.12);--head:rgba(250,249,247,.86);
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#0f1214;--card:#161a1d;--ink:#e9ece9;--muted:#8c948f;--line:#242a2c;
+    --heat:#ff6a37;--heat-soft:#26170f;--done:#2fbd85;--done-soft:#10201a;--chip:#1b2023;
+    --shadow:rgba(0,0,0,.5);--head:rgba(15,18,20,.82);
+  }}
+  :root[data-theme="light"]{
+    --bg:#faf9f7;--card:#ffffff;--ink:#1c1f24;--muted:#6d7680;--line:#e9e7e2;
+    --heat:#e4571f;--heat-soft:#fdeee6;--done:#12a06b;--done-soft:#eaf7f1;--chip:#f1efeb;
+    --shadow:rgba(30,28,24,.12);--head:rgba(250,249,247,.86);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f1214;--card:#161a1d;--ink:#e9ece9;--muted:#8c948f;--line:#242a2c;
+    --heat:#ff6a37;--heat-soft:#26170f;--done:#2fbd85;--done-soft:#10201a;--chip:#1b2023;
+    --shadow:rgba(0,0,0,.5);--head:rgba(15,18,20,.82);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:var(--heat);}
+  .theme-toggle{position:fixed;top:14px;right:14px;z-index:60;width:42px;height:42px;border-radius:50%;
+    border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;color:var(--ink);
+    box-shadow:0 6px 18px -8px var(--shadow);}
+  .theme-toggle svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px;}
+  .crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);padding:18px 0 0;}
+  .crumb a{color:var(--muted);text-decoration:none;font-weight:600;}
+  .crumb a:hover{color:var(--heat);}
+
+  .top{position:sticky;top:0;z-index:20;background:var(--head);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);margin-top:12px;}
+  .top .row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 0;}
+  .idw{display:flex;align-items:center;gap:16px;min-width:0;}
+  .thumb{flex:0 0 auto;width:64px;height:64px;border-radius:14px;object-fit:cover;box-shadow:0 5px 16px -6px var(--shadow);background:var(--chip);}
+  .idw h1{margin:0;font-size:clamp(20px,3.4vw,26px);letter-spacing:-.02em;line-height:1.1;}
+  .tags{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap;}
+  .tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+    background:var(--chip);border-radius:6px;padding:3px 8px;}
+  .scaler{display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card);}
+  .scaler button{border:0;background:var(--card);width:46px;height:48px;font-size:22px;color:var(--heat);cursor:pointer;line-height:1;}
+  .scaler button:hover{background:var(--heat-soft);}
+  .scaler button:disabled{color:var(--muted);opacity:.4;cursor:not-allowed;background:var(--card);}
+  .scaler .srv{min-width:104px;text-align:center;padding:0 4px;}
+  .scaler .srv b{display:block;font-size:19px;font-variant-numeric:tabular-nums;}
+  .scaler .srv span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;}
+
+  .intro{color:var(--muted);font-size:16px;max-width:64ch;margin:22px 0 4px;}
+  .cols{display:grid;grid-template-columns:340px 1fr;gap:34px;padding:24px 0 90px;align-items:start;}
+  h2{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:700;}
+
+  .ing{position:sticky;top:110px;}
+  .ing ul{list-style:none;margin:0;padding:0;}
+  .ing li{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;}
+  .ing li .box{flex:0 0 22px;width:22px;height:22px;margin-top:1px;border:2px solid var(--line);border-radius:7px;display:grid;place-items:center;transition:.15s;background:var(--card);}
+  .ing li .box svg{width:13px;height:13px;opacity:0;stroke:#fff;stroke-width:3.2;fill:none;}
+  .ing li.done .box{background:var(--done);border-color:var(--done);}
+  .ing li.done .box svg{opacity:1;}
+  .ing li.done .name{color:var(--muted);text-decoration:line-through;}
+  .ing li .q{font-weight:700;font-variant-numeric:tabular-nums;color:var(--heat);flex:0 0 auto;min-width:52px;}
+  .ing li .name{flex:1;font-size:15px;line-height:1.4;}
+
+  .steps .bar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin:0 0 18px;}
+  .steps .bar i{display:block;height:100%;width:0;background:var(--heat);transition:width .3s;}
+  .steps .hint{font-size:12.5px;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;margin-left:8px;}
+  .steps ol{list-style:none;margin:0;padding:0;counter-reset:st;}
+  .steps li{counter-increment:st;display:flex;gap:14px;padding:14px;border:1px solid var(--line);border-radius:13px;
+    margin-bottom:9px;cursor:pointer;transition:.15s;align-items:flex-start;background:var(--card);}
+  .steps li:hover{border-color:var(--heat);}
+  .steps li .n{flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:var(--heat-soft);color:var(--heat);
+    font-weight:700;display:grid;place-items:center;font-size:14px;margin-top:1px;}
+  .steps li .n::before{content:counter(st);}
+  .steps li.done{background:var(--done-soft);border-color:var(--done);}
+  .steps li.done .n{background:var(--done);color:#fff;}
+  .steps li.done .n::before{content:"✓";}
+  .steps li.done .txt{color:var(--muted);text-decoration:line-through;}
+  .steps li .txt{font-size:15.5px;line-height:1.55;}
+  .steps li .subs{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:14px;}
+  .steps li.done .subs{text-decoration:line-through;}
+
+  @media(max-width:820px){
+    .cols{grid-template-columns:1fr;gap:8px;}
+    .ing{position:static;padding-bottom:24px;margin-bottom:8px;border-bottom:1px solid var(--line);}
+  }
+  @media(max-width:560px){
+    .top .row{padding:12px 0;}
+    .thumb{width:52px;height:52px;border-radius:12px;}
+    .scaler{flex:1 0 100%;justify-content:space-between;}
+    .scaler .srv{flex:1;}
+    .ing li{padding:13px 0;}
+    .ing li .name,.steps li .txt{font-size:16px;}
+    .steps li{padding:15px;}
+  }</style>
+</head>
+<body>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+<div class="wrap">
+  <nav class="crumb"><a href="../index.html">← All recipes</a><span>/</span><span>Spices</span></nav>
+</div>
+<header class="top">
+  <div class="wrap">
+    <div class="row">
+      <div class="idw">
+        <img class="thumb" src="../images/taklia.jpeg" alt="Taklia" loading="lazy" onerror="this.style.visibility='hidden'" />
+        <div>
+          <h1>Taklia</h1>
+          <div class="tags"><span class="tag">Spices</span></div>
+        </div>
+      </div>
+      <div class="scaler" role="group" aria-label="Scale batch">
+        <button type="button" class="dec" aria-label="Decrease">−</button>
+        <div class="srv"><b class="srvnum">1</b><span>batch</span></div>
+        <button type="button" class="inc" aria-label="Increase">+</button>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <p class="intro">A versatile, savory blend usually added to soups and stews just before serving. The recipes are from <a href="https://smile.amazon.com/gp/product/1465475575/" target="_blank" rel="noopener">Science of Spice by Dr. Stuart Farrimond</a>. I would highly recommend reading the book.</p>
+  <div class="cols">
+    <section class="ing">
+      <h2>Ingredients</h2>
+      <ul>
+            <li><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8l4 4 8-9"/></svg></span><span class="q" data-lo="3">3</span><span class="name">cloves peeled and sliced garlic</span></li>
+            <li><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8l4 4 8-9"/></svg></span><span class="q" data-lo="2">2</span><span class="name">tbsp olive oil</span></li>
+            <li><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8l4 4 8-9"/></svg></span><span class="q" data-lo="1">1</span><span class="name">tsp ground coriander</span></li>
+            <li><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8l4 4 8-9"/></svg></span><span class="q"></span><span class="name">pinch of cayenne</span></li>
+            <li><span class="box"><svg viewBox="0 0 16 16"><path d="M2 8l4 4 8-9"/></svg></span><span class="q" data-lo="0.5">½</span><span class="name">tsp sea salt</span></li>
+      </ul>
+    </section>
+    <section class="steps">
+      <h2>Method<span class="hint">tap a step when it's done</span></h2>
+      <div class="bar"><i></i></div>
+      <ol>
+              <li><span class="n"></span><div><div class="txt">Fry the garlic gently in oil, till it is fragrant but not colored</div></div></li>
+              <li><span class="n"></span><div><div class="txt">Pour it in a mortar with coriander, cayenne, and salt</div></div></li>
+              <li><span class="n"></span><div><div class="txt">Grind to paste</div></div></li>
+      </ol>
+    </section>
+  </div>
+</main>
+<script>
+  (function(){
+    var BASE=1, srv=BASE;
+    var num=document.querySelector('.srvnum'), dec=document.querySelector('.dec'), inc=document.querySelector('.inc');
+    function fmt(x){
+      var whole=Math.floor(x+1e-6), frac=x-whole, g=[[0.25,'¼'],[0.5,'½'],[0.75,'¾'],[1/3,'⅓'],[2/3,'⅔']];
+      for(var i=0;i<g.length;i++){if(Math.abs(frac-g[i][0])<0.03)return (whole?whole:'')+g[i][1];}
+      if(frac<0.03)return String(whole);
+      return String(Math.round(x*100)/100);
+    }
+    function rescale(){
+      var m=srv/BASE; num.textContent=srv; dec.disabled=srv<=1;
+      document.querySelectorAll('.ing .q[data-lo]').forEach(function(el){
+        var lo=parseFloat(el.getAttribute('data-lo'))*m, hi=el.getAttribute('data-hi');
+        el.textContent=hi!=null?fmt(lo)+'–'+fmt(parseFloat(hi)*m):fmt(lo);
+      });
+    }
+    dec.addEventListener('click',function(){srv=Math.max(1,srv-1);rescale();});
+    inc.addEventListener('click',function(){srv=Math.min(48,srv+1);rescale();});
+    document.querySelectorAll('.ing li').forEach(function(li){
+      li.addEventListener('click',function(){li.classList.toggle('done');});
+    });
+    var steps=document.querySelectorAll('.steps li'), bar=document.querySelector('.steps .bar i');
+    function prog(){var d=document.querySelectorAll('.steps li.done').length;bar.style.width=(steps.length?d/steps.length*100:0)+'%';}
+    steps.forEach(function(li){li.addEventListener('click',function(){li.classList.toggle('done');prog();});});
+    rescale();
+  })();
+  
+  (function(){
+    var root=document.documentElement, btn=document.getElementById('themeToggle');
+    var sun='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.5v2.5M12 20v2.5M3.5 3.5l1.8 1.8M18.7 18.7l1.8 1.8M1.5 12h2.5M20 12h2.5M3.5 20.5l1.8-1.8M18.7 5.3l1.8-1.8"/></svg>';
+    var moon='<svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>';
+    function eff(){var a=root.getAttribute('data-theme');return a?a:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+    function paint(){btn.innerHTML=eff()==='dark'?sun:moon;}
+    btn.addEventListener('click',function(){var n=eff()==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem('wm-theme',n);paint();});
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){if(!localStorage.getItem('wm-theme'))paint();});
+    paint();
+  })();
+</script>
+</body>
+</html>

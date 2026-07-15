@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>Weeklymunch — Recipes</title>
+<script>(function(){var t=localStorage.getItem('wm-theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<style>
+  :root{
+    --bg:#faf9f7;--card:#ffffff;--ink:#1c1f24;--muted:#6d7680;--line:#e9e7e2;
+    --heat:#e4571f;--heat-soft:#fdeee6;--done:#12a06b;--done-soft:#eaf7f1;--chip:#f1efeb;
+    --shadow:rgba(30,28,24,.12);--head:rgba(250,249,247,.86);
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#0f1214;--card:#161a1d;--ink:#e9ece9;--muted:#8c948f;--line:#242a2c;
+    --heat:#ff6a37;--heat-soft:#26170f;--done:#2fbd85;--done-soft:#10201a;--chip:#1b2023;
+    --shadow:rgba(0,0,0,.5);--head:rgba(15,18,20,.82);
+  }}
+  :root[data-theme="light"]{
+    --bg:#faf9f7;--card:#ffffff;--ink:#1c1f24;--muted:#6d7680;--line:#e9e7e2;
+    --heat:#e4571f;--heat-soft:#fdeee6;--done:#12a06b;--done-soft:#eaf7f1;--chip:#f1efeb;
+    --shadow:rgba(30,28,24,.12);--head:rgba(250,249,247,.86);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f1214;--card:#161a1d;--ink:#e9ece9;--muted:#8c948f;--line:#242a2c;
+    --heat:#ff6a37;--heat-soft:#26170f;--done:#2fbd85;--done-soft:#10201a;--chip:#1b2023;
+    --shadow:rgba(0,0,0,.5);--head:rgba(15,18,20,.82);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  a{color:var(--heat);}
+  .theme-toggle{position:fixed;top:14px;right:14px;z-index:60;width:42px;height:42px;border-radius:50%;
+    border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;color:var(--ink);
+    box-shadow:0 6px 18px -8px var(--shadow);}
+  .theme-toggle svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+  .hero{padding:64px 0 26px;text-align:center;}
+  .hero .brand{font-size:clamp(34px,6vw,52px);letter-spacing:.28em;text-transform:uppercase;color:var(--heat);font-weight:700;margin:0 0 12px;}
+  .hero h1{font-size:clamp(34px,6vw,52px);letter-spacing:-.03em;margin:0 0 12px;line-height:1.02;}
+  .hero p{color:var(--muted);max-width:56ch;margin:0 auto;font-size:17px;}
+  .search{max-width:440px;margin:26px auto 0;position:relative;}
+  .search input{width:100%;padding:13px 16px 13px 44px;border-radius:12px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);font-size:15px;}
+  .search input:focus{outline:2px solid var(--heat);outline-offset:1px;border-color:var(--heat);}
+  .search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;}
+
+  section.cat{padding:34px 0 6px;}
+  .cat h2{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 18px;
+    display:flex;align-items:center;gap:12px;}
+  .cat h2::after{content:"";flex:1;height:1px;background:var(--line);}
+  .cat h2 .count{font-size:12px;color:var(--muted);letter-spacing:0;text-transform:none;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
+  .rcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;text-decoration:none;color:inherit;transition:.15s;box-shadow:0 10px 26px -20px var(--shadow);}
+  .rcard:hover{transform:translateY(-3px);border-color:var(--heat);box-shadow:0 18px 34px -22px var(--shadow);}
+  .rcard .ph{aspect-ratio:16/10;background:var(--chip);background-size:cover;background-position:center;}
+  .rcard .meta{padding:14px 16px 16px;}
+  .rcard h3{margin:0 0 5px;font-size:16.5px;letter-spacing:-.01em;line-height:1.2;}
+  .rcard .date{font-size:12.5px;color:var(--muted);}
+  .empty{display:none;color:var(--muted);text-align:center;padding:40px 0 20px;}
+  footer{padding:50px 0 70px;text-align:center;color:var(--muted);font-size:13px;}
+  @media(max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:12px;}.rcard h3{font-size:15px;}}</style>
+</head>
+<body>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+<header class="hero">
+  <div class="wrap">
+    <h1 class="brand">Weekly munch</h1>
+    <p>From meals to drinks to spice blends to syrups, built for the kitchen counter.</p>
+    <div class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="filter" type="search" placeholder="Search recipes…" aria-label="Search recipes" autocomplete="off" />
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <section class="cat" data-cat="meals">
+    <h2>Meals<span class="count">11</span></h2>
+    <div class="grid">
+        <a class="rcard" href="meals/vegan-radish-kimchi-stew.html" data-title="vegan radish kimchi stew">
+          <div class="ph" style="background-image:url('images/vegan-radish-kimchi-stew.jpeg')"></div>
+          <div class="meta"><h3>Vegan Radish Kimchi Stew</h3><div class="date">Mar 9, 2025</div></div>
+        </a>
+        <a class="rcard" href="meals/banana-shaak.html" data-title="banana shaak">
+          <div class="ph" style="background-image:url('images/banana-shaak.jpeg')"></div>
+          <div class="meta"><h3>Banana Shaak</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+        <a class="rcard" href="meals/brazilian-cheese-balls.html" data-title="brazilian cheese balls (vegan)">
+          <div class="ph" style="background-image:url('images/cheese-balls.jpeg')"></div>
+          <div class="meta"><h3>Brazilian Cheese Balls (Vegan)</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+        <a class="rcard" href="meals/dal-fry.html" data-title="dal fry">
+          <div class="ph" style="background-image:url('images/dal-fry.jpeg')"></div>
+          <div class="meta"><h3>Dal Fry</h3><div class="date">Jun 29, 2022</div></div>
+        </a>
+        <a class="rcard" href="meals/gujarati-kadhi.html" data-title="gujarati kadhi (probiotic soup)">
+          <div class="ph" style="background-image:url('images/gujarati-kadhi.jpg')"></div>
+          <div class="meta"><h3>Gujarati Kadhi (Probiotic soup)</h3><div class="date">May 9, 2021</div></div>
+        </a>
+        <a class="rcard" href="meals/gujarati-daal.html" data-title="gujarati dal">
+          <div class="ph" style="background-image:url('images/gujarati-dal.jpg')"></div>
+          <div class="meta"><h3>Gujarati Dal</h3><div class="date">Jan 26, 2021</div></div>
+        </a>
+        <a class="rcard" href="meals/pav-bhaji.html" data-title="pav bhaji">
+          <div class="ph" style="background-image:url('images/pav-bhaji.jpg')"></div>
+          <div class="meta"><h3>Pav Bhaji</h3><div class="date">Jan 23, 2021</div></div>
+        </a>
+        <a class="rcard" href="meals/chole.html" data-title="chole / chana masala">
+          <div class="ph" style="background-image:url('images/chole.jpg')"></div>
+          <div class="meta"><h3>Chole / Chana Masala</h3><div class="date">Jan 21, 2021</div></div>
+        </a>
+        <a class="rcard" href="meals/rice-porridge.html" data-title="kanki/ghens (gujarati rice porridge)">
+          <div class="ph" style="background-image:url('images/gujarati-rice-porridge.jpg')"></div>
+          <div class="meta"><h3>Kanki/Ghens (Gujarati Rice Porridge)</h3><div class="date">Jan 19, 2021</div></div>
+        </a>
+        <a class="rcard" href="meals/vegan-almond-flour-cookies.html" data-title="vegan almond flour cookie">
+          <div class="ph" style="background-image:url('images/almond-flour-cookies.png')"></div>
+          <div class="meta"><h3>Vegan Almond Flour Cookie</h3><div class="date">Jan 16, 2021</div></div>
+        </a>
+        <a class="rcard" href="meals/scrambled-tofu.html" data-title="tofu scramble">
+          <div class="ph" style="background-image:url('images/scrambled-tofu.jpg')"></div>
+          <div class="meta"><h3>Tofu Scramble</h3><div class="date">Aug 6, 2020</div></div>
+        </a>
+    </div>
+  </section>
+  <section class="cat" data-cat="drinks">
+    <h2>Drinks<span class="count">5</span></h2>
+    <div class="grid">
+        <a class="rcard" href="drinks/saratoga-cooler.html" data-title="dry saratoga cooler (na)">
+          <div class="ph" style="background-image:url('images/saratoga.jpeg')"></div>
+          <div class="meta"><h3>Dry Saratoga Cooler (NA)</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+        <a class="rcard" href="drinks/honeydew-cooler.html" data-title="honeydew lemon tarragon cooler">
+          <div class="ph" style="background-image:url('images/honeydew-cooler.jpeg')"></div>
+          <div class="meta"><h3>Honeydew Lemon Tarragon Cooler</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+        <a class="rcard" href="drinks/mint-juice.html" data-title="mint juice">
+          <div class="ph" style="background-image:url('images/mint-juice.jpeg')"></div>
+          <div class="meta"><h3>Mint Juice</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+        <a class="rcard" href="drinks/mlg-sparkler.html" data-title="mint, lime, and ginger sparkler">
+          <div class="ph" style="background-image:url('images/sparkler.jpeg')"></div>
+          <div class="meta"><h3>Mint, Lime, and Ginger Sparkler</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+        <a class="rcard" href="drinks/masala-chaas.html" data-title="masala chaas (yogurt drink / indian kefir)">
+          <div class="ph" style="background-image:url('images/chaas.jpeg')"></div>
+          <div class="meta"><h3>Masala Chaas (yogurt drink / Indian Kefir)</h3><div class="date">Dec 4, 2021</div></div>
+        </a>
+    </div>
+  </section>
+  <section class="cat" data-cat="spices">
+    <h2>Spices<span class="count">6</span></h2>
+    <div class="grid">
+        <a class="rcard" href="spices/advieh.html" data-title="advieh">
+          <div class="ph" style="background-image:url('images/advieh.jpeg')"></div>
+          <div class="meta"><h3>Advieh</h3><div class="date">Jun 10, 2021</div></div>
+        </a>
+        <a class="rcard" href="spices/arabic-baharat.html" data-title="arabic baharat">
+          <div class="ph" style="background-image:url('images/arabic-baharat.jpg')"></div>
+          <div class="meta"><h3>Arabic Baharat</h3><div class="date">Jun 10, 2021</div></div>
+        </a>
+        <a class="rcard" href="spices/taklia.html" data-title="taklia">
+          <div class="ph" style="background-image:url('images/taklia.jpeg')"></div>
+          <div class="meta"><h3>Taklia</h3><div class="date">Jun 10, 2021</div></div>
+        </a>
+        <a class="rcard" href="spices/turkish-baharat.html" data-title="turkish baharat spice mix">
+          <div class="ph" style="background-image:url('images/turkish-baharat.jpg')"></div>
+          <div class="meta"><h3>Turkish Baharat Spice Mix</h3><div class="date">Jun 9, 2021</div></div>
+        </a>
+        <a class="rcard" href="spices/zaatar.html" data-title="za'atar spice">
+          <div class="ph" style="background-image:url('images/zaatar.jpg')"></div>
+          <div class="meta"><h3>Za'atar Spice</h3><div class="date">Jun 9, 2021</div></div>
+        </a>
+        <a class="rcard" href="spices/zhug.html" data-title="zhug">
+          <div class="ph" style="background-image:url('images/zhug.jpg')"></div>
+          <div class="meta"><h3>Zhug</h3><div class="date">Jun 9, 2021</div></div>
+        </a>
+    </div>
+  </section>
+  <section class="cat" data-cat="syrups">
+    <h2>Syrups<span class="count">3</span></h2>
+    <div class="grid">
+        <a class="rcard" href="syrups/ginger.html" data-title="ginger syrup">
+          <div class="ph" style="background-image:url('images/ginger-syrup.jpeg')"></div>
+          <div class="meta"><h3>Ginger Syrup</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+        <a class="rcard" href="syrups/lavender.html" data-title="lavender syrup">
+          <div class="ph" style="background-image:url('images/lavender-syrup.jpg')"></div>
+          <div class="meta"><h3>Lavender Syrup</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+        <a class="rcard" href="syrups/mint.html" data-title="mint syrup">
+          <div class="ph" style="background-image:url('images/mint-syrup.jpeg')"></div>
+          <div class="meta"><h3>Mint Syrup</h3><div class="date">Jul 15, 2024</div></div>
+        </a>
+    </div>
+  </section>
+  <p class="empty" id="empty">No recipes match that search.</p>
+</main>
+<footer>Built from markdown · Weeklymunch</footer>
+<script>
+  (function(){
+    var input=document.getElementById('filter'), cards=[].slice.call(document.querySelectorAll('.rcard')),
+        sections=[].slice.call(document.querySelectorAll('.cat')), empty=document.getElementById('empty');
+    input.addEventListener('input',function(){
+      var q=input.value.trim().toLowerCase(), any=false;
+      cards.forEach(function(c){var hit=c.getAttribute('data-title').indexOf(q)>-1;c.style.display=hit?'':'none';if(hit)any=true;});
+      sections.forEach(function(s){var vis=s.querySelectorAll('.rcard:not([style*="none"])').length;s.style.display=vis?'':'none';});
+      empty.style.display=any?'none':'block';
+    });
+  })();
+
+  (function(){
+    var root=document.documentElement, btn=document.getElementById('themeToggle');
+    var sun='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 1.5v2.5M12 20v2.5M3.5 3.5l1.8 1.8M18.7 18.7l1.8 1.8M1.5 12h2.5M20 12h2.5M3.5 20.5l1.8-1.8M18.7 5.3l1.8-1.8"/></svg>';
+    var moon='<svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>';
+    function eff(){var a=root.getAttribute('data-theme');return a?a:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+    function paint(){btn.innerHTML=eff()==='dark'?sun:moon;}
+    btn.addEventListener('click',function(){var n=eff()==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem('wm-theme',n);paint();});
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){if(!localStorage.getItem('wm-theme'))paint();});
+    paint();
+  })();
+</script>
+</body>
+</html>
